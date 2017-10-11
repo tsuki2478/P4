@@ -1,0 +1,68 @@
+你的流程：
+简历具有四个不同的部分：工作、教育、项目和具有个人信息的标题。你将需要：
+
+构建四个 javaScript 对象，每个对象代表一个不同的简历部分。你创建的对象（包括属性名称 及其值的数据类型）需完全遵循以下模式。所有属性均应包括在内并且包含指定类型的值，除非该属性标记为 'optional'。属性值可能包含真或假数据。属性名称区分大小写。确保使用 jshint.com 将你的 javaScript 对象正确格式化。
+bio 包含：
+
+     name: 字符串
+     role: 字符串
+     contacts: 对象
+           mobile: 字符串
+           email: 字符串 
+           github: 字符串
+           twitter: 字符串（可选）
+           location: 字符串
+     welcomeMessage: 字符串 
+     skills: 字符串数组
+     biopic: url
+     display: 函数
+education 包含：
+
+     schools: 对象数组
+          name: 字符串
+          location: 字符串
+          degree: 字符串
+          majors: 字符串数组
+          dates: 字符串（之间使用连字符）
+          url: 字符串
+     onlineCourses: 对象数组
+          title: 字符串
+          school: 字符串
+          dates: 字符串（之间使用连字符）
+          url: 字符串
+     display: 函数
+work 包含
+
+     jobs: 对象数组
+          employer: 字符串 
+          title: 字符串 
+          location: 字符串 
+          dates: 字符串（可以是 'in progress'）
+          description: 字符串 
+     display: 函数
+projects 包含：
+
+     projects: 对象数组
+           title: 字符串 
+           dates: 字符串（之间使用连字符）
+           description: 字符串
+           images: 字符串格式的 url 数组
+     display: 函数
+迭代每个 javaScript 对象并将其信息附加到 index.html 正确的部分。
+
+首先，你将使用 jQuery 的 selector.append() 和 selector.prepend() 函数来修改 index.html。selector.append() 使元素显示在所选部分的末尾。selector.prepend() 使元素显示在所选部分的开始。
+密切关注 index.html 中 <div> 的 id 和 helper.js 中的 HTML 代码段。它们作为用于 selector.append() 和 selector.prepend() 的 jQuery 选择器，将十分有用。
+你还将使用 JavaScript 方法 string.replace(old, new) 将所有占位符文本（例如，%data%）替换为简历 javaScript 对象中的数据。
+这是一些代码的示例，会将你公司的地址添加到页面中：
+
+var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+$(".work-entry:last").append(formattedLocation);
+使用文档底部的模型作为顺序指南将元素附加到页面。
+简历包括交互式地图。执行以下操作将其添加。
+
+在 resumeBuilder.js 中，将 googleMap 字符串添加到 <div id=”mapDiv”> 中。
+在 index.html 中，取消注释 Google 脚本元素：<script type="text/javascript" src="http://maps.googleapis.cn/maps/api/js?libraries=places"></script>
+在 helper.js 文件底部，取消注释代码以初始化地图并设置 fitBounds。
+用于将元素添加到简历的所有代码应 包含在函数内。
+如 JavaScript 对象模式中所描述，每个 display 函数应封装其在简历中显示的 JavaScript 对象内。例如，用于将 'work' 经历数据 附加到简历的 display 函数应封装在 work Javascript 对象内。display 函数 可以定义其他属性的方式封装在 work JavaScript 对象内， 或者可稍后使用点标记封装在文件内。例如：work.display =
+当你单击地图上的大头针时，可以显示附加信息。请检查 helper.js 中的 174 行和 Google Maps API 予以了解。
