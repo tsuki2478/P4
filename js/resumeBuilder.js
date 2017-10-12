@@ -6,7 +6,7 @@ var bio = {
     "name": "Cy Tsuki",
     "role": "Java developer||Web developer",
     "contacts": { 
-        "moblie": "158-0000-0000",
+        "mobile": "158-0000-0000",
         "email": "tsuki2478@outlook.com",
         "github": "tsuki2478",
         "facebook": "tsuki2478",
@@ -23,28 +23,28 @@ var education = {
         "location": "中国广东省河源市",
         "majors": ["ordinary"],
         "dates": "2012/07-2015/07",
-        "Degree":"",        
-        "url": ""
+        "degree":"normal",        
+        "url": "https://cn.udacity.com"
     }, {
         "name": "Web English",
         "location": "中国广东省东莞市",
         "majors": ["Web developer"],
         "dates": "2017/02-2019/02",
-        "Degree":"Entry Level",        
-        "url": ""
+        "degree":"Entry Level",        
+        "url": "https://cn.udacity.com"
     }, {
         "name": "TRDA",
         "location": "中国广东省东莞市",
         "majors": ["Java developer"],
         "dates": "2016/10-2017/04",
-        "Degree":"medium",
-        "url": ""
+        "degree":"medium",
+        "url": "https://cn.udacity.com"
     }],
     "onlineCourses": [{
         "title": " Front end development of webpage",
         "school": "Udacity",
         "dates": "2017",
-        "Degree":"Entry Level",
+        "degree":"Entry Level",
         "url": "https://cn.udacity.com"
     }]
 };
@@ -83,7 +83,7 @@ bio.display = function() {
     var HTMLName = HTMLheaderName.replace("%data%", bio.name);
     var HTMLRole = HTMLheaderRole.replace("%data%", bio.role);
 
-    var biomobile = HTMLmobile.replace("%data%", bio.contacts.moblie);
+    var biomobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
     var biomeail = HTMLemail.replace("%data%", bio.contacts.email);
     var biogithub = HTMLgithub.replace("%data%", bio.contacts.github);
     var biofacebook = HTMLfacebook.replace("%data%", bio.contacts.facebook);
@@ -97,11 +97,8 @@ bio.display = function() {
     $("#header").prepend(HTMLName);
 
     //联系信息
-    $("#topContacts:last:last").append(biomobile);
-    $("#topContacts:last:last").append(biomeail);
-    $("#topContacts:last:last").append(biogithub);
-    $("#topContacts:last:last").append(biofacebook);
-    $("#topContacts:last:last").append(biolocation);
+    $("#topContacts:last").append(biomobile,biomeail,biogithub,biofacebook,biolocation);
+    $("#footerContacts:last").append(biomobile,biomeail,biogithub,biofacebook,biolocation);
     //图片与介绍
     $("#header").append(biopic);
     $("#header").append(biowelcome);
@@ -122,18 +119,15 @@ education.display = function() {
     if (education.schools.length > 0) {
         $("#education").append(HTMLschoolStart);
         for (var i = 0; i < education.schools.length; i++) {
-            var edname = HTMLschoolName.replace("%data%", education.schools[i].name);
-            var edDegree =HTMLschoolDegree.replace("%data%", education.schools[i].Degree);
-            var nameDegree =edname+edDegree;
+            var edname = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#",education.schools[i].url);
+            var eddegree =HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+            var namedegree =edname+eddegree;
             var edlocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
             var edmajors = HTMLschoolMajor.replace("%data%", education.schools[i].majors);
             var eddates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
             var edurl = HTMLschoolDegree.replace("%data%", education.schools[i].url);
-            $(".education-entry:last").append(nameDegree);
-            $(".education-entry:last").append(eddates);
-            $(".education-entry:last").append(edlocation);
-            $(".education-entry:last").append(edmajors);
-            $(".education-entry:last").append(edurl);            
+
+            $(".education-entry:last").append(namedegree,eddates,edlocation,edmajors);            
         }
     }
     // 线下
@@ -144,11 +138,10 @@ education.display = function() {
             var onschool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
             var titleschool =ontitle+onschool;
             var ondates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
-            var onurl = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
-
-            $(".education-entry:last").append(titleschool);
-            $(".education-entry:last").append(ondates);
-            $(".education-entry:last").append(onurl);
+            var onurl = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url).replace("#",education.onlineCourses[i].url);
+          
+ 
+            $(".education-entry:last").append(titleschool,ondates,onurl);            
         }
     } 
 }
@@ -166,10 +159,7 @@ work.display = function (){
           var worklocation    = HTMLworkLocation.replace("%data%",work.jobs[i].location);
           var workdescription = HTMLworkDescription.replace("%data%",work.jobs[i].description);
 
-          $(".work-entry:last").append(employertitle);
-          $(".work-entry:last").append(worklocation);
-          $(".work-entry:last").append(workdates);
-          $(".work-entry:last").append(workdescription);
+          $(".work-entry:last").append(employertitle,worklocation,workdates,workdescription);          
         }
     }
 }
@@ -185,9 +175,7 @@ work.display();
         var prodates       = HTMLprojectDates.replace("%data%",projects.projects[i].dates);
         var prodescription = HTMLprojectDescription.replace("%data%",projects.projects[i].description);
     
-        $(".project-entry:last").append(protitle);
-        $(".project-entry:last").append(prodates);
-        $(".project-entry:last").append(prodescription);
+        $(".project-entry:last").append(protitle,prodates,prodescription);
         if(projects.projects[i].images.length >0){
             for(var j = 0; j<projects.projects[i].images.length; j++){
                  var propic  = HTMLprojectImage.replace("%data%",projects.projects[i].images[j]);
